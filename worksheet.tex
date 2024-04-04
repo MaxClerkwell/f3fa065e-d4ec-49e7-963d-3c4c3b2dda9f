@@ -7,16 +7,25 @@
 
 
 \begin{document}
-
-
+Parsing command line arguments is a foundational aspect of building flexible programs. This allows users to specify configurations, provide inputs, and control the behavior of a program without modifying the code.  Over the past exercises, we have already used many CLI arguments for various programs. 
+Now, we want to understand how to parse and use these arguments in our own code. In this context, we will explore the implementation of a program that utilizes command line arguments to manipulate data structures such as graphs.
 
 \section*{Exercises}
 \begin{aufgabe}
-    Write a program, that provides a command-line-interface to dynamically generate new nodes of a user-defined struct in a graph.
+    Your task is to create a program that features a command-line interface (CLI) enabling the dynamic generation of nodes within a graph, based on a structure you define. To accomplish this, you'll need to complete these steps :
+    \begin{itemize}
+        \item Capture and handle all arguments passed to your program. Think about how you would call this program
+        \item Check if these arguments are valid and decide what part of code you want to execute
+        \item Map the parsed arguments into a graph structure. Consider what kind of data structure might best represent your graph in memory, you can also refer to the links for help.
+        \item Update the graph according to the user's requests. This could involve adding new nodes, creating edges, or other modifications.
+        \item Generate meaningful output or feedback for the user, so they understand what actions were performed or if any errors occurred.
+    \end{itemize}
+Before diving into coding, it's a good idea to sketch out how you expect your program to be called, including example commands and the output you anticipate. This planning step can clarify your understanding and streamline your development process.
 \end{aufgabe}
 
 \begin{aufgabe}
-    Write an algorithm, that counts the number of elements in the graph.
+    Next, we want to count the number of nodes that are currently present in a given graph. Add this functionality to your program and let it write the number of nodes that were found onto the terminal.
+    
 \end{aufgabe}
 
 \section*{Anmerkungen}
