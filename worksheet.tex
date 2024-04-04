@@ -8,15 +8,43 @@
 
 \begin{document}
 
-
+Information is not always just a single piece of data, neither is it always a consecutive sequence of bytes.
+In some cases, the data is structured or encoded in a way that several pieces make up the whole data-set.
+Think of an application like facebook. 
+Every account has some attributes, like name, birthday, etc., but also contains a list of friends.
+Each element in the list of friends is structured the same way. 
+The resulting data structure can be abstracted as a mathematical graph.
+One possible implementation of a graph is called a linked list.
+Each element of the linked list, contains a piece of usable data, as well as a pointer to the next neighbour, as well as a pointer to the previous neighbour.
+Look at the following link for an \href{https://godbolt.org/#g:!((g:!((g:!((h:codeEditor,i:(filename:'1',fontScale:14,fontUsePx:'0',j:1,lang:___c,selection:(endColumn:2,endLineNumber:31,positionColumn:2,positionLineNumber:31,selectionStartColumn:2,selectionStartLineNumber:31,startColumn:2,startLineNumber:31),source:'%23include+%3Cstdio.h%3E%0A%0Atypedef+struct+node+node%3B%0A%0Astruct+node%7B%0A++++++++int+data%3B%0A++++++++node*+next%3B%0A%7D%3B%0A%0Aint+main()%7B%0A++++++++node+a+%3D+%7B%0A++++++++++++++++.data+%3D+2,%0A++++++++++++++++.next+%3D+NULL%0A++++++++%7D%3B%0A%0A++++++++node+b+%3D+%7B%0A++++++++++++++++.data+%3D+4,%0A++++++++++++++++.next+%3D+NULL%0A++++++++%7D%3B%0A%0A++++++++a.next+%3D+%26b%3B%0A%0A++++++++printf(%22+++Adresse+von+a:+%25p%5Cn%22,+%26a)%3B%0A++++++++printf(%22++++Inhalt+von+a:+%25d%5Cn%22,+a.data)%3B%0A++++++++printf(%22N%C3%A4chstes+Element:+%25p%5Cn%22,+a.next)%3B%0A++++++++printf(%22+++Adresse+von+b:+%25p%5Cn%22,+%26b)%3B%0A++++++++printf(%22++++Inhalt+von+b:+%25d%5Cn%22,+b.data)%3B%0A++++++++printf(%22N%C3%A4chstes+Element:+%25p%5Cn%22,+b.next)%3B%0A%0A++++++++return+0%3B%0A%7D'),l:'5',n:'0',o:'C+source+%231',t:'0')),k:51.65615141955836,l:'4',n:'0',o:'',s:0,t:'0'),(g:!((h:executor,i:(argsPanelShown:'1',compilationPanelShown:'0',compiler:cg131,compilerName:'',compilerOutShown:'0',execArgs:'',execStdin:'',fontScale:14,fontUsePx:'0',j:1,lang:___c,libs:!(),options:'',overrides:!(),runtimeTools:!(),source:1,stdinPanelShown:'1',wrap:'1'),l:'5',n:'0',o:'Executor+x86-64+gcc+13.1+(C,+Editor+%231)',t:'0')),header:(),k:48.34384858044164,l:'4',n:'0',o:'',s:0,t:'0')),l:'2',n:'0',o:'',t:'0')),version:4}{example of this}.
 
 \section*{Exercises}
 \begin{aufgabe}
-    Write a program, that provides a command-line-interface to dynamically generate new nodes of a user-defined struct in a graph.
+    Write a program, that creates a graph of nodes. 
+    Each node should contain a number as an integer. 
+    Succeedingly write a function, that takes a pointer to a node and prints the value of the node. 
 \end{aufgabe}
 
 \begin{aufgabe}
-    Write an algorithm, that counts the number of elements in the graph.
+    Now write a function, that contains a while loop.
+    The function takes a pointer to a node and prints all numbers from the nodes, starting with the node it was given.
+    At the end of the while loop, the loop variable gets set to the next node. 
+    If there is no next node, the loop ends and the function returns. 
+    You have now successfully travesed a graph! 
+\end{aufgabe}
+
+\begin{aufgabe}
+    We can use graphs, to store data of arbitrary length (as long as it is smaller than our RAM).
+    In order to do this, we need to be able to allocate memory dynamically.
+    For this we will use the heap strategy. 
+    We controlled the stack with the operators \texttt{\{} and \texttt{\}}.
+    We control the heap with the operators \texttt{malloc()} and \texttt{free()}.
+    \texttt{malloc()} takes the size in bytes as an argument and returns a pointer to the allocated memory.
+    \texttt{free()} takes a pointer to the memory as an argument and frees the memory.
+    Working with the heap can be dangerous.
+    In order to use it correctly, more than just one day of training is required.
+    Just take a look at the following program and try to understand what happens:
+    \href{https://godbolt.org/#z:OYLghAFBqd5QCxAYwPYBMCmBRdBLAF1QCcAaPECAMzwBtMA7AQwFtMQByARg9KtQYEAysib0QXACx8BBAKoBnTAAUAHpwAMvAFYTStJg1AB9U8lJL6yAngGVG6AMKpaAVxYM9DgDJ4GmADl3ACNMYhAANgB2UgAHVAVCWwZnNw89eMSbAV9/IJZQ8OiLTCtshiECJmICVPdPLhKy5MrqglzAkLDImIUqmrr0xr62jvzCnoBKC1RXYmR2DgBSACYAZj9kNywAaiW1xz78VAA6BH3sJY0AQVWNhi3XXf3DgnRaPGCzi6vbm4IAJ6xTBYKg7PrEVzWHYMDCYPZRABCvx2qJ2fgIO3QTCq%2B2RNzR4IIkOhsKwACoYZhVAQ8b8llEACIwuF0m6/MmYSnIYiYHGYYyciAYrE4piTBH466EzmU/wAdwCcL2a2ZLDEtFQyAgiQAXphUFQIJzJpM2dK0XgwRAwGAFUqsBKGVLCYTYsQMUbVisALKYFgkAE7MLEEhLACsjgY3rNaxdrtRvIIcwYOwCcm83nNhIZjJRaPtcIAtBdsVUVcyy0xswXMIrixd/DSK2mM1m4/nE5hk8RU4WsObc/SbrL0QwlDVBXDjXDKQg%2BehSGPMVWnUjOyyKVT689VTseXyCAKhaua6irTsbWB50x0Gv4wmAPSPnYAdUYqfw8N8fXh9DC6J9BuhI3ugLb9pgZ4IsypRKJKwFos%2BOxCFC86igoOzYAwuxYMQOw/keCGoqOR4sLELagVBhLyggdDwhApGxCWaxYdSBD3kRrqMS2jHMaxNJUWiQ4EgmOxIQAYksjhrEsiKOMA8JYH2mCuIwOwANKwkeqa0QwuquJxvGNmx4F1g6kEdiJqLCRaXY9jpC6Dkyw7XAAbqgeBge6GLGB8fQzluoEcVZm5cjs3H7MylGWbZOw0XRl6McFsVuh6gheisKzXOgvIKHBWAYdg9BsIICggHsKzhrEEZRt6pBJYJqLeelEDeq6ACSDAIGIK4AeZ5WrOG6A1dGmVLkZLGnjFok7M1BAZSshIBFJMnXJIyAIL%2BhXFYwBADZV1WRqNKzjf6THGTSsYPlxZ08WdfFNrS01Cc5IVzQt6aZiNMZOXm7I3O5nk7FQvICn5BABWFQXwSFJFnVB8X0Je0POoZt2RTs0XXSBC4UQuD1sY1wOgwxZ1XRuNmUzcIrqn4EDJTKs6Y7jGOfe212gS2fgTgQU5YBAoFLlw5MhZzGPc2EvNCoLOwrCLsVi3uEuTtLC5Lms8s47eXPjpLfOYALas7JImtonNvl4P5QVQSDmBg5bEPW89dkpjsGi/b8HDTLQnDhrwngcFopCoJwjjgrM8zwncPD1ZoXvTAA1iA4ZcCcEThhEXAp5IXAAJzhuGAAcawRPonCSP7cfB5wvBlRoseB17pBwLASDUpgyCuEQZAUBA1TAAoyiGKUQgIKg8oBzHaBkXQOLJEP/i0KP48B0H0%2BxHR4TIMAXBrI06%2BbwErCLLwB/0MQADyXfLxPVft8g1zEAPNekPflT4AHvD8IIIhiOwUgyEEIoFQ6hG6kF0I0AwRgQCmGMOYD4wQyqQGmKgWI5QyocF4KgVyIZPKYCQfTUgkJBB4DYAAFVQC4Ah0wFARwWHoI4fgF4jzHrfbgvB5TECYLETgPBva%2B0rmAkOHBsCqA7l3EgOxVCFwiEWCIkgdjAGQMgHYu8ThcEvI4JcuBCCSOjpMXge1G6mlIKBbohCk6SELicNYkg1iFysUXDQkgc7yLLhwCupBV5YJfnXBuWgTE%2Bw4CsQRQdhGGLjiYnBxBEh2EkEAA}{Dynamically adding nodes}
 \end{aufgabe}
 
 \section*{Anmerkungen}
